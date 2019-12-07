@@ -10,11 +10,11 @@
 
 "use strict";
 
-const Curation = require("./curation"),
-  Order = require("./order"),
-  Response = require("./response"),
-  Care = require("./care"),
-  Survey = require("./survey"),
+// const Curation = require("./curation"),
+// Order = require("./order"),
+const Response = require("./response"),
+  // Care = require("./care"),
+  // Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
   i18n = require("../i18n.config");
 
@@ -35,18 +35,20 @@ module.exports = class Receive {
       if (event.message) {
         let message = event.message;
 
-        if (message.quick_reply) {
-          responses = this.handleQuickReply();
-        } else if (message.attachments) {
+        // if (message.quick_reply) {
+        //   responses = this.handleQuickReply();
+        // } else
+        if (message.attachments) {
           responses = this.handleAttachmentMessage();
         } else if (message.text) {
           responses = this.handleTextMessage();
         }
-      } else if (event.postback) {
-        responses = this.handlePostback();
-      } else if (event.referral) {
-        responses = this.handleReferral();
       }
+      // else if (event.postback) {
+      //   responses = this.handlePostback();
+      // } else if (event.referral) {
+      //   responses = this.handleReferral();
+      // }
     } catch (error) {
       console.error(error);
       responses = {
@@ -139,88 +141,88 @@ module.exports = class Receive {
     return response;
   }
 
-  // Handles mesage events with quick replies
-  handleQuickReply() {
-    // Get the payload of the quick reply
-    let payload = this.webhookEvent.message.quick_reply.payload;
+  // // Handles mesage events with quick replies
+  // handleQuickReply() {
+  //   // Get the payload of the quick reply
+  //   let payload = this.webhookEvent.message.quick_reply.payload;
 
-    return this.handlePayload(payload);
-  }
+  //   return this.handlePayload(payload);
+  // }
 
-  // Handles postbacks events
-  handlePostback() {
-    let postback = this.webhookEvent.postback;
-    // Check for the special Get Starded with referral
-    let payload;
-    if (postback.referral && postback.referral.type == "OPEN_THREAD") {
-      payload = postback.referral.ref;
-    } else {
-      // Get the payload of the postback
-      payload = postback.payload;
-    }
-    return this.handlePayload(payload.toUpperCase());
-  }
+  // // Handles postbacks events
+  // handlePostback() {
+  //   let postback = this.webhookEvent.postback;
+  //   // Check for the special Get Starded with referral
+  //   let payload;
+  //   if (postback.referral && postback.referral.type == "OPEN_THREAD") {
+  //     payload = postback.referral.ref;
+  //   } else {
+  //     // Get the payload of the postback
+  //     payload = postback.payload;
+  //   }
+  //   return this.handlePayload(payload.toUpperCase());
+  // }
 
-  // Handles referral events
-  handleReferral() {
-    // Get the payload of the postback
-    let payload = this.webhookEvent.referral.ref.toUpperCase();
+  // // Handles referral events
+  // handleReferral() {
+  //   // Get the payload of the postback
+  //   let payload = this.webhookEvent.referral.ref.toUpperCase();
 
-    return this.handlePayload(payload);
-  }
+  //   return this.handlePayload(payload);
+  // }
 
-  handlePayload(payload) {
-    console.log("Received Payload:", `${payload} for ${this.user.psid}`);
+  // handlePayload(payload) {
+  //   console.log("Received Payload:", `${payload} for ${this.user.psid}`);
 
-    // Log CTA event in FBA
-    GraphAPi.callFBAEventsAPI(this.user.psid, payload);
+  //   // Log CTA event in FBA
+  //   GraphAPi.callFBAEventsAPI(this.user.psid, payload);
 
-    let response;
+  //   let response;
 
-    // Set the response based on the payload
-    if (
-      payload === "GET_STARTED" ||
-      payload === "DEVDOCS" ||
-      payload === "GITHUB"
-    ) {
-      response = Response.genNuxMessage(this.user);
-    } else if (payload.includes("CURATION") || payload.includes("COUPON")) {
-      let curation = new Curation(this.user, this.webhookEvent);
-      response = curation.handlePayload(payload);
-    } else if (payload.includes("CARE")) {
-      let care = new Care(this.user, this.webhookEvent);
-      response = care.handlePayload(payload);
-    } else if (payload.includes("ORDER")) {
-      response = Order.handlePayload(payload);
-    } else if (payload.includes("CSAT")) {
-      response = Survey.handlePayload(payload);
-    } else if (payload.includes("CHAT-PLUGIN")) {
-      response = [
-        Response.genText(i18n.__("chat_plugin.prompt")),
-        Response.genText(i18n.__("get_started.guidance")),
-        Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("care.order"),
-            payload: "CARE_ORDER"
-          },
-          {
-            title: i18n.__("care.billing"),
-            payload: "CARE_BILLING"
-          },
-          {
-            title: i18n.__("care.other"),
-            payload: "CARE_OTHER"
-          }
-        ])
-      ];
-    } else {
-      response = {
-        text: `This is a default postback message for payload: ${payload}!`
-      };
-    }
+  //   // Set the response based on the payload
+  //   if (
+  //     payload === "GET_STARTED" ||
+  //     payload === "DEVDOCS" ||
+  //     payload === "GITHUB"
+  //   ) {
+  //     response = Response.genNuxMessage(this.user);
+  //   } else if (payload.includes("CURATION") || payload.includes("COUPON")) {
+  //     let curation = new Curation(this.user, this.webhookEvent);
+  //     response = curation.handlePayload(payload);
+  //   } else if (payload.includes("CARE")) {
+  //     let care = new Care(this.user, this.webhookEvent);
+  //     response = care.handlePayload(payload);
+  //   } else if (payload.includes("ORDER")) {
+  //     response = Order.handlePayload(payload);
+  //   } else if (payload.includes("CSAT")) {
+  //     response = Survey.handlePayload(payload);
+  //   } else if (payload.includes("CHAT-PLUGIN")) {
+  //     response = [
+  //       Response.genText(i18n.__("chat_plugin.prompt")),
+  //       Response.genText(i18n.__("get_started.guidance")),
+  //       Response.genQuickReply(i18n.__("get_started.help"), [
+  //         {
+  //           title: i18n.__("care.order"),
+  //           payload: "CARE_ORDER"
+  //         },
+  //         {
+  //           title: i18n.__("care.billing"),
+  //           payload: "CARE_BILLING"
+  //         },
+  //         {
+  //           title: i18n.__("care.other"),
+  //           payload: "CARE_OTHER"
+  //         }
+  //       ])
+  //     ];
+  //   } else {
+  //     response = {
+  //       text: `This is a default postback message for payload: ${payload}!`
+  //     };
+  //   }
 
-    return response;
-  }
+  //   return response;
+  // }
 
   handlePrivateReply(type, object_id) {
     let welcomeMessage =
