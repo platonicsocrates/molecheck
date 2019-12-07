@@ -16,6 +16,8 @@ const Response = require("./response"),
   // Care = require("./care"),
   // Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
+  fs = require("fs"),
+  // request = require("request"),
   i18n = require("../i18n.config");
 
 module.exports = class Receive {
@@ -134,9 +136,33 @@ module.exports = class Receive {
     let attachment = this.webhookEvent.message.attachments[0];
     console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
 
+    // console.log(fs.readFileSync(attachment).buffer.toString("base64"));
+
     response = Response.genText(
       "Thanks for sending this picture!!! I'm just analysing it now."
     );
+
+    // TODO: Convert image to base64
+    // TODO: Post base64 to Flask server
+    // TODO: Listen for response from Flask server
+
+    //  Listen for post/get requests (app.js)
+    // request.post(
+    //   'https://whatever.com/todos',
+    //   {
+    //     json: {
+    //       todo: "Buy the milk"
+    //     }
+    //   },
+    //   (error, res, body) => {
+    //     if (error) {
+    //       console.error(error);
+    //       return;
+    //     }
+    //     console.log(`statusCode: ${res.statusCode}`);
+    //     console.log(body);
+    //   }
+    // );
 
     return response;
   }
