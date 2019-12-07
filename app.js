@@ -96,7 +96,7 @@ app.post("/webhook", (req, res) => {
               );
               break;
             default:
-              console.log('Unsupported feed change type.');
+              console.log("Unsupported feed change type.");
               return;
           }
         }
