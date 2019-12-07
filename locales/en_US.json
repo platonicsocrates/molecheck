@@ -1,6 +1,6 @@
 {
   "profile": {
-    "greeting": "Welcome to MoleChecl {{user_first_name}}! Send is a picture of your skin to for analysis!"
+    "greeting": "Welcome to MoleCheck {{user_first_name}}! Send us a picture of your skin to for analysis!"
   },
   "menu": {
     "support": "Customer Support",
@@ -12,7 +12,7 @@
   },
   "get_started": {
     "welcome": "Hi {{userFirstName}}! Welcome to MoleCheck! We'll check photos of your skin for any abnormalities.",
-    "guidance": "At any time, use the menu below to navigate through the features",
+    "guidance": "All you need to do is upload a picture of your skin, and we'll handle the rest!",
     "help": "What we can do to help you today?"
   },
   "leadgen": {

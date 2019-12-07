@@ -80,36 +80,42 @@ module.exports = class Receive {
 
     let response;
 
+    // const response = Response.genText(
+    //   "Sorry but we don't yet support text messaging. Please send a picture instead."
+    // );
+
     if (
       (greeting && greeting.confidence > 0.8) ||
       message.includes("start over")
     ) {
       response = Response.genNuxMessage(this.user);
-    } else if (Number(message)) {
-      response = Order.handlePayload("ORDER_NUMBER");
-    } else if (message.includes("#")) {
-      response = Survey.handlePayload("CSAT_SUGGESTION");
-    } else if (message.includes(i18n.__("care.help").toLowerCase())) {
-      let care = new Care(this.user, this.webhookEvent);
-      response = care.handlePayload("CARE_HELP");
-    } else {
+    }
+    // else if (Number(message)) {
+    //   response = Order.handlePayload("ORDER_NUMBER");
+    // } else if (message.includes("#")) {
+    //   response = Survey.handlePayload("CSAT_SUGGESTION");
+    // } else if (message.includes(i18n.__("care.help").toLowerCase())) {
+    //   let care = new Care(this.user, this.webhookEvent);
+    //   response = care.handlePayload("CARE_HELP");
+    // }
+    else {
       response = [
         Response.genText(
           i18n.__("fallback.any", {
             message: this.webhookEvent.message.text
           })
         ),
-        Response.genText(i18n.__("get_started.guidance")),
-        Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("menu.suggestion"),
-            payload: "CURATION"
-          },
-          {
-            title: i18n.__("menu.help"),
-            payload: "CARE_HELP"
-          }
-        ])
+        Response.genText(i18n.__("get_started.guidance"))
+        // Response.genQuickReply(i18n.__("get_started.help"), [
+        //   {
+        //     title: i18n.__("menu.suggestion"),
+        //     payload: "CURATION"
+        //   },
+        //   {
+        //     title: i18n.__("menu.help"),
+        //     payload: "CARE_HELP"
+        //   }
+        // ])
       ];
     }
 
@@ -126,16 +132,9 @@ module.exports = class Receive {
     let attachment = this.webhookEvent.message.attachments[0];
     console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
 
-    response = Response.genQuickReply(i18n.__("fallback.attachment"), [
-      {
-        title: i18n.__("menu.help"),
-        payload: "CARE_HELP"
-      },
-      {
-        title: i18n.__("menu.start_over"),
-        payload: "GET_STARTED"
-      }
-    ]);
+    response = Response.genText(
+      "Thanks for sending this picture!!! I'm just analysing it now."
+    );
 
     return response;
   }
