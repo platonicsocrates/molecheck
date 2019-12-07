@@ -9,9 +9,9 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 # TODO Update with our skin disease model
-imagenet_class_index = json.load(open('<PATH/TO/.json/FILE>/imagenet_class_index.json'))
-model = models.densenet121(pretrained=True)
-model.eval()
+#imagenet_class_index = json.load(open('<PATH/TO/.json/FILE>/imagenet_class_index.json'))
+#model = models.densenet121(pretrained=True)
+#model.eval()
 
 
 def transform_image(image_bytes):
@@ -50,10 +50,12 @@ def get_prediction(image_bytes):
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        file = request.files['file']
-        img_bytes = file.read()
-        class_id, class_name = get_prediction(image_bytes=img_bytes)
-        return jsonify({'class_id': class_id, 'class_name': class_name})
+        #file = request.files['file']
+        #img_bytes = file.read()
+        print("received")
+        #class_id, class_name = get_prediction(image_bytes=img_bytes)
+        #return jsonify({'class_id': class_id, 'class_name': class_name})
+        return 1
 
 
 if __name__ == '__main__':
