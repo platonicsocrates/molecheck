@@ -118,6 +118,8 @@ module.exports = class Receive {
 
   // Handles mesage events with attachments
   handleAttachmentMessage() {
+    // TODO: Here run the picture through the model
+
     let response;
 
     // Get the attachment
@@ -221,9 +223,12 @@ module.exports = class Receive {
     return response;
   }
 
-  handlePrivateReply(type,object_id) {
-    let welcomeMessage = i18n.__("get_started.welcome") + " " +
-      i18n.__("get_started.guidance") + ". " +
+  handlePrivateReply(type, object_id) {
+    let welcomeMessage =
+      i18n.__("get_started.welcome") +
+      " " +
+      i18n.__("get_started.guidance") +
+      ". " +
       i18n.__("get_started.help");
 
     let response = Response.genQuickReply(welcomeMessage, [
