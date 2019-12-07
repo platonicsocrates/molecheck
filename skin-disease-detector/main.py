@@ -50,7 +50,11 @@ def main():
     resnext.fc = torch.nn.Linear(num_ftrs, 7)
     optimizer = torch.optim.Adam(resnext.parameters(), lr=1e-6)
     criterion = torch.nn.CrossEntropyLoss()
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        device = torch.device("cuda:0")
+        resnext.cuda()
+    else:
+        device = torch.device("cpu")
     print(device)
     max_epochs = 20
     trainings_error = []
