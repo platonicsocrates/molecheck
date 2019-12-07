@@ -16,8 +16,8 @@ const Response = require("./response"),
   // Care = require("./care"),
   // Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
-  fs = require("fs"),
-  // request = require("request"),
+  // fs = require("fs"),
+  request = require("request"),
   i18n = require("../i18n.config");
 
 module.exports = class Receive {
@@ -147,22 +147,23 @@ module.exports = class Receive {
     // TODO: Listen for response from Flask server
 
     //  Listen for post/get requests (app.js)
-    // request.post(
-    //   'https://whatever.com/todos',
-    //   {
-    //     json: {
-    //       todo: "Buy the milk"
-    //     }
-    //   },
-    //   (error, res, body) => {
-    //     if (error) {
-    //       console.error(error);
-    //       return;
-    //     }
-    //     console.log(`statusCode: ${res.statusCode}`);
-    //     console.log(body);
-    //   }
-    // );
+    request.post(
+      // Change this to localhost
+      'https://whatever.com/todos',
+      {
+        json: {
+          todo: "Buy the milk"
+        }
+      },
+      (error, res, body) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        console.log(`statusCode: ${res.statusCode}`);
+        console.log(body);
+      }
+    );
 
     return response;
   }
