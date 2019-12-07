@@ -152,7 +152,7 @@ module.exports = class Receive {
       'http://127.0.0.1:5000/predict',
       {
         json: {
-          todo: "Buy the milk"
+          base64: "base64 image"
         }
       },
       (error, res, body) => {
