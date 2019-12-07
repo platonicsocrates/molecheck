@@ -149,7 +149,7 @@ module.exports = class Receive {
     //  Listen for post/get requests (app.js)
     request.post(
       // Change this to localhost
-      'http://127.0.0.1:5000/predict',
+      "http://127.0.0.1:5000/predict",
       {
         json: {
           base64: "base64 image"
