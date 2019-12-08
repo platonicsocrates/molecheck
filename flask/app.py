@@ -69,7 +69,7 @@ def predict():
         #print("received")
         #class_id, class_name = get_prediction(image_bytes=img_bytes)
         #return jsonify({'class_id': class_id, 'class_name': class_name})
-        return ()
+        return jsonify({'lookalike': 'a mark'})
 
 
 if __name__ == '__main__':
