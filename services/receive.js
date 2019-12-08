@@ -104,7 +104,7 @@ module.exports = class Receive {
           imgUrl: imgUrl
         }
       },
-      (error, res, body) => {
+      async (error, res, body) => {
         if (error) {
           console.error(error);
           return;
@@ -114,7 +114,7 @@ module.exports = class Receive {
 
         console.log("body.lookalike: ", body.lookalike);
         // lookalike = body.lookalike;
-        return body.lookalike;
+        return await body.lookalike;
       }
     );
 
