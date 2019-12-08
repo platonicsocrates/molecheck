@@ -87,7 +87,7 @@ module.exports = class Receive {
   handleAttachmentMessage() {
     let response;
 
-    var lookalike;
+    let lookalike;
 
     // Get the attachment
     let attachment = this.webhookEvent.message.attachments[0];
@@ -113,17 +113,25 @@ module.exports = class Receive {
         console.log(body);
 
         lookalike = body.lookalike;
+
+        console.log("Lookalike: ", lookalike);
+
+        response = Response.genText(
+          "Our advanced CNNs and ML and AI say you look like: ",
+          lookalike
+        );
+        return response;
       }
     );
 
-    console.log("Lookalike: ", lookalike);
+    // console.log("Lookalike: ", lookalike);
 
-    response = Response.genText(
-      "Our advanced CNNs and ML and AI say you look like: ",
-      lookalike
-    );
+    // response = Response.genText(
+    //   "Our advanced CNNs and ML and AI say you look like: ",
+    //   lookalike
+    // );
 
-    return response;
+    // return response;
   }
 
   // handlePrivateReply(type, object_id) {
