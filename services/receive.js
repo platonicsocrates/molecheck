@@ -84,10 +84,10 @@ module.exports = class Receive {
   }
 
   // Handles mesage events with attachments
-  handleAttachmentMessage() {
+  async handleAttachmentMessage() {
     let response;
 
-    let lookalike;
+    // let lookalike;
 
     // Get the attachment
     let attachment = this.webhookEvent.message.attachments[0];
@@ -96,7 +96,7 @@ module.exports = class Receive {
     const imgUrl = attachment.payload.url;
     console.log(imgUrl);
 
-    request.post(
+    const lookalike = await request.post(
       // Change this to localhost
       "http://127.0.0.1:5000/predict",
       {
@@ -112,26 +112,19 @@ module.exports = class Receive {
         console.log(`statusCode: ${res.statusCode}`);
         console.log(body);
 
-        lookalike = body.lookalike;
-
-        console.log("Lookalike: ", lookalike);
-
-        response = Response.genText(
-          "Our advanced CNNs and ML and AI say you look like: ",
-          lookalike
-        );
-        return response;
+        // lookalike = body.lookalike;
+        return body.lookalike;
       }
     );
 
-    // console.log("Lookalike: ", lookalike);
+    console.log("Lookalike: ", lookalike);
 
-    // response = Response.genText(
-    //   "Our advanced CNNs and ML and AI say you look like: ",
-    //   lookalike
-    // );
+    response = Response.genText(
+      "Our advanced CNNs and ML and AI say you look like: ",
+      lookalike
+    );
 
-    // return response;
+    return response;
   }
 
   // handlePrivateReply(type, object_id) {
