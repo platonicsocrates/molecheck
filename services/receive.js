@@ -130,35 +130,6 @@ module.exports = class Receive {
     return response;
   }
 
-  // handlePrivateReply(type, object_id) {
-  //   let welcomeMessage =
-  //     i18n.__("get_started.welcome") +
-  //     " " +
-  //     i18n.__("get_started.guidance") +
-  //     ". " +
-  //     i18n.__("get_started.help");
-
-  //   let response = Response.genQuickReply(welcomeMessage, [
-  //     {
-  //       title: i18n.__("menu.suggestion"),
-  //       payload: "CURATION"
-  //     },
-  //     {
-  //       title: i18n.__("menu.help"),
-  //       payload: "CARE_HELP"
-  //     }
-  //   ]);
-
-  //   let requestBody = {
-  //     recipient: {
-  //       [type]: object_id
-  //     },
-  //     message: response
-  //   };
-
-  //   GraphAPi.callSendAPI(requestBody);
-  // }
-
   sendMessage(response, delay = 0) {
     // Check if there is delay in the response
     if ("delay" in response) {
@@ -173,20 +144,6 @@ module.exports = class Receive {
       },
       message: response
     };
-
-    // // Check if there is persona id in the response
-    // if ("persona_id" in response) {
-    //   let persona_id = response["persona_id"];
-    //   delete response["persona_id"];
-
-    //   requestBody = {
-    //     recipient: {
-    //       id: this.user.psid
-    //     },
-    //     message: response,
-    //     persona_id: persona_id
-    //   };
-    // }
 
     setTimeout(() => GraphAPi.callSendAPI(requestBody), delay);
   }
