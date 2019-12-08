@@ -1,10 +1,14 @@
 import io
 import json
+import requests
+import matplotlib.pyplot as plt
 
 from torchvision import models
 import torchvision.transforms as transforms
 from PIL import Image
 from flask import Flask, jsonify, request
+import base64
+
 
 app = Flask(__name__)
 
@@ -50,12 +54,22 @@ def get_prediction(image_bytes):
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
+
+        img_dict = json.loads(json.dumps(request.json))
+        print(img_dict)
+        r = requests.get(img_dict["imgUrl"])
+        print(r.content)
+        with open('mark.png', 'wb') as f:
+            f.write(r.content)
+
+
         #file = request.files['file']
         #img_bytes = file.read()
-        print("received")
+        #imgdata = base64.b64decode(imgstring)
+        #print("received")
         #class_id, class_name = get_prediction(image_bytes=img_bytes)
         #return jsonify({'class_id': class_id, 'class_name': class_name})
-        return 1
+        return ()
 
 
 if __name__ == '__main__':
