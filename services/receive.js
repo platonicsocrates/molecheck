@@ -87,7 +87,7 @@ module.exports = class Receive {
   handleAttachmentMessage() {
     let response;
 
-    let lookalike;
+    var lookalike;
 
     // Get the attachment
     let attachment = this.webhookEvent.message.attachments[0];
