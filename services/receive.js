@@ -95,7 +95,7 @@ module.exports = class Receive {
 
     const imgUrl = attachment.payload.url;
     console.log(imgUrl);
-
+    const that = this;
     const lookalike = request.post(
       // Change this to localhost
       "http://127.0.0.1:5000/predict",
@@ -104,7 +104,7 @@ module.exports = class Receive {
           imgUrl: imgUrl
         }
       },
-      async (error, res, body) => {
+      function(error, res, body) {
         if (error) {
           console.error(error);
           return;
@@ -113,17 +113,19 @@ module.exports = class Receive {
         console.log(body);
 
         console.log("body.lookalike: ", body.lookalike);
-        // lookalike = body.lookalike;
-        return await body.lookalike;
+
+        that.sendMessage(
+          Response.genText(
+            "Our advanced CNNs and ML and AI say you look like: " +
+              body.lookalike
+          )
+        );
       }
     );
 
     console.log("Lookalike: ", lookalike);
 
-    response = Response.genText(
-      "Our advanced CNNs and ML and AI say you look like: ",
-      lookalike
-    );
+    response = Response.genText("Processing...");
 
     return response;
   }
