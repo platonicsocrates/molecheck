@@ -171,13 +171,13 @@ module.exports = class Receive {
 
         lookalike = body.lookalike;
 
-        console.log("Your lookalike is: ", lookalike);
-        // console.log(res.lookalike);
+        console.log("Lookalike: ", lookalike);
       }
     );
 
     response = Response.genText(
-      "Thanks for sending this picture!!! You look like: ____"
+      "Our advanced CNNs and ML and AI say you look like: ",
+      lookalike
     );
 
     return response;
