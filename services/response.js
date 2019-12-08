@@ -30,61 +30,61 @@ module.exports = class Response {
     return response;
   }
 
-  static genGenericTemplate(image_url, title, subtitle, buttons) {
-    let response = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [
-            {
-              title: title,
-              subtitle: subtitle,
-              image_url: image_url,
-              buttons: buttons
-            }
-          ]
-        }
-      }
-    };
+  // static genGenericTemplate(image_url, title, subtitle, buttons) {
+  //   let response = {
+  //     attachment: {
+  //       type: "template",
+  //       payload: {
+  //         template_type: "generic",
+  //         elements: [
+  //           {
+  //             title: title,
+  //             subtitle: subtitle,
+  //             image_url: image_url,
+  //             buttons: buttons
+  //           }
+  //         ]
+  //       }
+  //     }
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
-  static genImageTemplate(image_url, title, subtitle = "") {
-    let response = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [
-            {
-              title: title,
-              subtitle: subtitle,
-              image_url: image_url
-            }
-          ]
-        }
-      }
-    };
+  // static genImageTemplate(image_url, title, subtitle = "") {
+  //   let response = {
+  //     attachment: {
+  //       type: "template",
+  //       payload: {
+  //         template_type: "generic",
+  //         elements: [
+  //           {
+  //             title: title,
+  //             subtitle: subtitle,
+  //             image_url: image_url
+  //           }
+  //         ]
+  //       }
+  //     }
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
-  static genButtonTemplate(title, buttons) {
-    let response = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: title,
-          buttons: buttons
-        }
-      }
-    };
+  // static genButtonTemplate(title, buttons) {
+  //   let response = {
+  //     attachment: {
+  //       type: "template",
+  //       payload: {
+  //         template_type: "button",
+  //         text: title,
+  //         buttons: buttons
+  //       }
+  //     }
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
   static genText(text) {
     let response = {
@@ -94,35 +94,35 @@ module.exports = class Response {
     return response;
   }
 
-  static genTextWithPersona(text, persona_id) {
-    let response = {
-      text: text,
-      persona_id: persona_id
-    };
+  // static genTextWithPersona(text, persona_id) {
+  //   let response = {
+  //     text: text,
+  //     persona_id: persona_id
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
-  static genPostbackButton(title, payload) {
-    let response = {
-      type: "postback",
-      title: title,
-      payload: payload
-    };
+  // static genPostbackButton(title, payload) {
+  //   let response = {
+  //     type: "postback",
+  //     title: title,
+  //     payload: payload
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
-  static genWebUrlButton(title, url) {
-    let response = {
-      type: "web_url",
-      title: title,
-      url: url,
-      messenger_extensions: true
-    };
+  // static genWebUrlButton(title, url) {
+  //   let response = {
+  //     type: "web_url",
+  //     title: title,
+  //     url: url,
+  //     messenger_extensions: true
+  //   };
 
-    return response;
-  }
+  //   return response;
+  // }
 
   static genNuxMessage(user) {
     let welcome = this.genText(
