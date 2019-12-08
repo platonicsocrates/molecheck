@@ -2,7 +2,7 @@
 
 MoleCheck is a bot built on top of Facebook Messenger.
 
-Its aim is to allow people to send pictures of their skin on Messenger and have them checked for signs of cancer.
+Its aim is to allow people to see which celebrity they look like.
 
 ## Credit
 
