@@ -112,6 +112,7 @@ module.exports = class Receive {
         console.log(`statusCode: ${res.statusCode}`);
         console.log(body);
 
+        console.log("body.lookalike: ", body.lookalike);
         // lookalike = body.lookalike;
         return body.lookalike;
       }
