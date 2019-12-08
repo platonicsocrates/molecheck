@@ -19,7 +19,8 @@ node_modules/
 # dotenv environment variables file
 .env
 
-skin-disease-detector/data/
-skin-disease-detector/.idea/
+face_similarity/data/
+face_similarity/.idea/
 flask/.idea/
+.idea/
 
