@@ -21,3 +21,5 @@ node_modules/
 
 skin-disease-detector/data/
 skin-disease-detector/.idea/
+flask/.idea/
+
