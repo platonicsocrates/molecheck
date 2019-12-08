@@ -84,7 +84,7 @@ module.exports = class Receive {
   }
 
   // Handles mesage events with attachments
-  async handleAttachmentMessage() {
+  handleAttachmentMessage() {
     let response;
 
     // let lookalike;
@@ -96,7 +96,7 @@ module.exports = class Receive {
     const imgUrl = attachment.payload.url;
     console.log(imgUrl);
 
-    const lookalike = await request.post(
+    const lookalike = request.post(
       // Change this to localhost
       "http://127.0.0.1:5000/predict",
       {
