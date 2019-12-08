@@ -132,6 +132,8 @@ module.exports = class Receive {
 
     let response;
 
+    let lookalike;
+
     // Get the attachment
     let attachment = this.webhookEvent.message.attachments[0];
     console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
@@ -142,9 +144,9 @@ module.exports = class Receive {
     const imgUrl = attachment.payload.url;
     console.log(imgUrl);
 
-    response = Response.genText(
-      "Thanks for sending this picture!!! I'm just analysing it now."
-    );
+    // response = Response.genText(
+    //   "Thanks for sending this picture!!! I'm just analysing it now."
+    // );
 
     // TODO: Convert image to base64
     // TODO: Post base64 to Flask server
@@ -166,7 +168,16 @@ module.exports = class Receive {
         }
         console.log(`statusCode: ${res.statusCode}`);
         console.log(body);
+
+        lookalike = body.lookalike;
+
+        console.log("Your lookalike is: ", lookalike);
+        // console.log(res.lookalike);
       }
+    );
+
+    response = Response.genText(
+      "Thanks for sending this picture!!! You look like: ____"
     );
 
     return response;
