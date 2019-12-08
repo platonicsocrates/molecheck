@@ -16,7 +16,7 @@ const Response = require("./response"),
   // Care = require("./care"),
   // Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
-  fs = require("fs"),
+  // fs = require("fs"),
   request = require("request"),
   i18n = require("../i18n.config");
 
@@ -139,17 +139,8 @@ module.exports = class Receive {
     // console.log(fs.readFileSync(attachment).buffer.toString("base64"));
     // console.log(Buffer.from(attachment).toString("base64"));
 
-    // function to encode file data to base64 encoded string
-    function base64_encode(file) {
-      // read binary data
-      const bitmap = fs.readFileSync(file);
-      // convert binary data to base64 encoded string
-      return new Buffer(bitmap).toString("base64");
-    }
-
-    // convert image to base64 encoded string
-    const base64str = base64_encode(attachment);
-    console.log(base64str);
+    const imgUrl = attachment.payload.url;
+    console.log(imgUrl);
 
     response = Response.genText(
       "Thanks for sending this picture!!! I'm just analysing it now."
@@ -165,7 +156,7 @@ module.exports = class Receive {
       "http://127.0.0.1:5000/predict",
       {
         json: {
-          imgString: "base64 image"
+          imgUrl: imgUrl
         }
       },
       (error, res, body) => {
