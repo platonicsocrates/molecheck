@@ -113,8 +113,6 @@ module.exports = class Receive {
         console.log(body);
 
         lookalike = body.lookalike;
-
-
       }
     );
 
