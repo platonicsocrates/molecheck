@@ -7,14 +7,14 @@ import torchvision.transforms as transforms
 from PIL import Image
 from flask import Flask, jsonify, request
 
-from class_to_celeb import class_to_celeb
-from model_loading import load_model
+from molecheck.flask.model_loading import load_model
+from molecheck.flask.class_to_celeb import class_to_celeb
 
 app = Flask(__name__)
 
 # TODO Update with our skin disease model
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = load_model('model_face.pth')
+model = load_model('model_face.pth', device)
 
 
 def transform_image(image_bytes):
