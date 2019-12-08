@@ -114,9 +114,11 @@ module.exports = class Receive {
 
         lookalike = body.lookalike;
 
-        console.log("Lookalike: ", lookalike);
+
       }
     );
+
+    console.log("Lookalike: ", lookalike);
 
     response = Response.genText(
       "Our advanced CNNs and ML and AI say you look like: ",
