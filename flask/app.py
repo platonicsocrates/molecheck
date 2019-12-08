@@ -7,8 +7,8 @@ import torchvision.transforms as transforms
 from PIL import Image
 from flask import Flask, jsonify, request
 
-from molecheck.flask.model_loading import load_model
-from molecheck.flask.class_to_celeb import class_to_celeb
+from flask.model_loading import load_model
+from flask.class_to_celeb import class_to_celeb
 
 app = Flask(__name__)
 
